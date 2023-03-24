@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // MARK: - IB Outlets
+    
     @IBOutlet var colorBoard: UIView!
     
     @IBOutlet var sliderRed: UISlider!
@@ -19,11 +21,15 @@ class ViewController: UIViewController {
     @IBOutlet var valueGreen: UILabel!
     @IBOutlet var valueBlue: UILabel!
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         colorBoard.layer.cornerRadius = 30
     }
+    
+    // MARK: - Actions
     
     @IBAction func sliderRedAction() {
         let sliderValue = sliderRed.value
@@ -42,6 +48,8 @@ class ViewController: UIViewController {
         valueBlue.text = String(format: "%.2f", sliderValue)
         setupColorBoard()
     }
+    
+    // MARK: - Private Methods
     
     private func setupColorBoard() {
         let red = CGFloat(sliderRed.value)
