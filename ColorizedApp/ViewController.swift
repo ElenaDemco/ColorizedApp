@@ -34,18 +34,16 @@ final class ViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func sliderRedAction() {
-        valueRed.text = String(format: "%.2f", sliderRed.value)
-        setupColorBoard()
-    }
-    
-    @IBAction func sliderGreenAction() {
-        valueGreen.text = String(format: "%.2f", sliderGreen.value)
-        setupColorBoard()
-    }
-    
-    @IBAction func sliderBlueAction() {
-        valueBlue.text = String(format: "%.2f", sliderBlue.value)
+    @IBAction func sliderAction(_sender: UIView) {
+        
+        switch _sender {
+        case valueRed:
+            valueRed.text = String(format: "%.2f", sliderRed.value)
+        case valueGreen:
+            valueGreen.text = String(format: "%.2f", sliderGreen.value)
+        default:
+            valueBlue.text = String(format: "%.2f", sliderBlue.value)
+        }
         setupColorBoard()
     }
     
