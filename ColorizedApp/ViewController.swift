@@ -34,12 +34,12 @@ final class ViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func sliderAction(_sender: UIView) {
+    @IBAction func sliderAction(_sender: UISlider) {
         
         switch _sender {
-        case valueRed:
+        case sliderRed:
             valueRed.text = String(format: "%.2f", sliderRed.value)
-        case valueGreen:
+        case sliderGreen:
             valueGreen.text = String(format: "%.2f", sliderGreen.value)
         default:
             valueBlue.text = String(format: "%.2f", sliderBlue.value)
