@@ -27,41 +27,43 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         colorBoard.layer.cornerRadius = 30
+        
+        setupColorBoard()
+        updateLabels()
     }
     
     // MARK: - Actions
     
     @IBAction func sliderRedAction() {
-        let sliderValue = sliderRed.value
-        valueRed.text = String(format: "%.2f", sliderValue)
+        valueRed.text = String(format: "%.2f", sliderRed.value)
         setupColorBoard()
     }
     
     @IBAction func sliderGreenAction() {
-        let sliderValue = sliderGreen.value
-        valueGreen.text = String(format: "%.2f", sliderValue)
+        valueGreen.text = String(format: "%.2f", sliderGreen.value)
         setupColorBoard()
     }
     
     @IBAction func sliderBlueAction() {
-        let sliderValue = sliderBlue.value
-        valueBlue.text = String(format: "%.2f", sliderValue)
+        valueBlue.text = String(format: "%.2f", sliderBlue.value)
         setupColorBoard()
     }
     
     // MARK: - Private Methods
     
     private func setupColorBoard() {
-        let red = CGFloat(sliderRed.value)
-        let green = CGFloat(sliderGreen.value)
-        let blue = CGFloat(sliderBlue.value)
         
         colorBoard.backgroundColor = UIColor(
-            red: red,
-            green: green,
-            blue: blue,
+            red: CGFloat(sliderRed.value),
+            green: CGFloat(sliderGreen.value),
+            blue: CGFloat(sliderBlue.value),
             alpha: 1
         )
+    }
+    private func updateLabels() {
+        valueRed.text = String(format: "%.2f", sliderRed.value)
+        valueGreen.text = String(format: "%.2f", sliderGreen.value)
+        valueBlue.text = String(format: "%.2f", sliderBlue.value)
     }
 }
 
