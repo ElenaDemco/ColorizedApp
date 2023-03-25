@@ -52,7 +52,7 @@
                                                 <rect key="frame" x="112" y="0.0" width="288" height="51"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                 <connections>
-                                                    <action selector="sliderRedAction" destination="BYZ-38-t0r" eventType="valueChanged" id="D8l-8s-HW6"/>
+                                                    <action selector="sliderActionWith_sender:" destination="BYZ-38-t0r" eventType="valueChanged" id="fNT-0n-4pK"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
@@ -82,7 +82,7 @@
                                                 <rect key="frame" x="112" y="0.0" width="288" height="51"/>
                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                 <connections>
-                                                    <action selector="sliderGreenAction" destination="BYZ-38-t0r" eventType="valueChanged" id="Ods-dH-8f5"/>
+                                                    <action selector="sliderActionWith_sender:" destination="BYZ-38-t0r" eventType="valueChanged" id="tYj-eh-QMm"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
@@ -112,7 +112,7 @@
                                                 <rect key="frame" x="112" y="0.0" width="288" height="51"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                                 <connections>
-                                                    <action selector="sliderBlueAction" destination="BYZ-38-t0r" eventType="valueChanged" id="7Bn-Zv-Mqy"/>
+                                                    <action selector="sliderActionWith_sender:" destination="BYZ-38-t0r" eventType="valueChanged" id="Uc2-MX-Kj2"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
