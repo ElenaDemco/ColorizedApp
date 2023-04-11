@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     @IBOutlet var valueGreen: UILabel!
     @IBOutlet var valueBlue: UILabel!
     
-    // MARK: - Lifecycle
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +29,23 @@ final class ViewController: UIViewController {
         colorBoard.layer.cornerRadius = 30
         
         setupColorBoard()
-        updateLabels()
+        
+        valueRed.text = getString(from: sliderRed)
+        valueGreen.text = getString(from: sliderGreen)
+        valueBlue.text = getString(from: sliderBlue)
     }
     
     // MARK: - Actions
     
-    @IBAction func sliderAction(_sender: UISlider) {
+    @IBAction func sliderAction(sender: UISlider) {
         
-        switch _sender {
+        switch sender {
         case sliderRed:
-            valueRed.text = String(format: "%.2f", sliderRed.value)
+            valueRed.text = getString(from: sliderRed)
         case sliderGreen:
-            valueGreen.text = String(format: "%.2f", sliderGreen.value)
+            valueGreen.text = getString(from: sliderGreen)
         default:
-            valueBlue.text = String(format: "%.2f", sliderBlue.value)
+            valueBlue.text = getString(from: sliderBlue)
         }
         setupColorBoard()
     }
@@ -58,10 +61,9 @@ final class ViewController: UIViewController {
             alpha: 1
         )
     }
-    private func updateLabels() {
-        valueRed.text = String(format: "%.2f", sliderRed.value)
-        valueGreen.text = String(format: "%.2f", sliderGreen.value)
-        valueBlue.text = String(format: "%.2f", sliderBlue.value)
+    
+    private func getString(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
 }
 
