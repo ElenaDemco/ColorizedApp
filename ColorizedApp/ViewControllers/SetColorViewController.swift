@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class SetColorViewController: UIViewController {
     
     // MARK: - IB Outlets
     
@@ -66,4 +66,3 @@ final class ViewController: UIViewController {
         String(format: "%.2f", slider.value)
     }
 }
-
