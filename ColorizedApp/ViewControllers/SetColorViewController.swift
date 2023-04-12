@@ -13,13 +13,21 @@ final class SetColorViewController: UIViewController {
     
     @IBOutlet var colorBoard: UIView!
     
-    @IBOutlet var sliderRed: UISlider!
-    @IBOutlet var sliderGreen: UISlider!
-    @IBOutlet var sliderBlue: UISlider!
+    @IBOutlet var colorsStack: UIStackView!
+    @IBOutlet var colorLabels: [UILabel]!
     
-    @IBOutlet var valueRed: UILabel!
-    @IBOutlet var valueGreen: UILabel!
-    @IBOutlet var valueBlue: UILabel!
+    @IBOutlet var valuesStack: [UIStackView]!
+    @IBOutlet var valueLabels: [UILabel]!
+    
+    @IBOutlet var slidersStack: UIStackView!
+    @IBOutlet var sliders: [UISlider]!
+    
+    @IBOutlet var userValuesStack: [UIStackView]!
+    @IBOutlet var userValues: [UITextField]!
+    
+    @IBOutlet var buttonDone: UIButton!
+    
+    
     
     // MARK: - Life cycle
     
@@ -30,24 +38,18 @@ final class SetColorViewController: UIViewController {
         
         setupColorBoard()
         
-        valueRed.text = getString(from: sliderRed)
-        valueGreen.text = getString(from: sliderGreen)
-        valueBlue.text = getString(from: sliderBlue)
+        for (index, slider) in sliders.enumerated() {
+            valueLabels[index].text = getString(from: slider)
+        }
     }
     
     // MARK: - Actions
     
-    @IBAction func sliderAction(sender: UISlider) {
-        
-        switch sender {
-        case sliderRed:
-            valueRed.text = getString(from: sliderRed)
-        case sliderGreen:
-            valueGreen.text = getString(from: sliderGreen)
-        default:
-            valueBlue.text = getString(from: sliderBlue)
+    @IBAction func slidersAction(sender: UISlider) {
+        if let sliderIndex = sliders.firstIndex(of: sender) {
+            valueLabels[sliderIndex].text = getString(from: sender)
+            setupColorBoard()
         }
-        setupColorBoard()
     }
     
     // MARK: - Private Methods
@@ -55,9 +57,9 @@ final class SetColorViewController: UIViewController {
     private func setupColorBoard() {
         
         colorBoard.backgroundColor = UIColor(
-            red: CGFloat(sliderRed.value),
-            green: CGFloat(sliderGreen.value),
-            blue: CGFloat(sliderBlue.value),
+            red: CGFloat(sliders[0].value),
+            green: CGFloat(sliders[1].value),
+            blue: CGFloat(sliders[2].value),
             alpha: 1
         )
     }
