@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class SetColorViewController: UIViewController {
+protocol ColorViewControllerDelegate: AnyObject {
+    func applyColor(color:UIColor)
+}
+
+final class ColorViewController: UIViewController {
     
     // MARK: - IB Outlets
     
@@ -27,26 +31,31 @@ final class SetColorViewController: UIViewController {
     
     @IBOutlet var buttonDone: UIButton!
     
-    // MARK: - Properties
-    
-    //    let delegate:
+    unowned var delegate: ColorViewControllerDelegate?
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        colorBoard.layer.cornerRadius = 30
+        colorBoard.layer.cornerRadius = 5
         
         setupColorBoard()
         
         for (index, slider) in sliders.enumerated() {
             valueLabels[index].text = getString(from: slider)
+            userValuesTF[index].text = getString(from: slider)
         }
         
         for textField in userValuesTF {
             textField.delegate = self
+            addButtonToKeyboard(for: textField)
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     // MARK: - Actions
@@ -59,9 +68,9 @@ final class SetColorViewController: UIViewController {
         }
     }
     
-    
     @IBAction func buttonDoneTapped() {
-        
+        delegate?.applyColor(color: colorBoard.backgroundColor ?? .white)
+        view.endEditing(true)
     }
     
     
@@ -93,19 +102,39 @@ final class SetColorViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    
+    private func addButtonToKeyboard(for textField: UITextField) {
+        
+        let keyboardToolBar = UIToolbar()
+        keyboardToolBar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(keyboardDoneButtonTapped)
+        )
+        
+        keyboardToolBar.items = [flexibleSpace, doneButton]
+        
+        textField.inputAccessoryView = keyboardToolBar
+    }
+    
+    @objc func keyboardDoneButtonTapped() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
 
-extension SetColorViewController: UITextFieldDelegate {
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
-    }
+extension ColorViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         guard let newValue = Float(textField.text ?? "") else { return }
         
         if newValue < 0 || newValue > 1 {
