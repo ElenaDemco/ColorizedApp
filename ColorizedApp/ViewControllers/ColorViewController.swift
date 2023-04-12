@@ -29,9 +29,10 @@ final class ColorViewController: UIViewController {
     @IBOutlet var userValuesStack: [UIStackView]!
     @IBOutlet var userValuesTF: [UITextField]!
     
-    @IBOutlet var buttonDone: UIButton!
+    // MARK: - Public Methods
     
     unowned var delegate: ColorViewControllerDelegate?
+    var backgroundVC: UIColor!
     
     // MARK: - Life cycle
     
@@ -39,8 +40,7 @@ final class ColorViewController: UIViewController {
         super.viewDidLoad()
         
         colorBoard.layer.cornerRadius = 5
-        
-        setupColorBoard()
+        colorBoard.backgroundColor = backgroundVC
         
         for (index, slider) in sliders.enumerated() {
             valueLabels[index].text = getString(from: slider)
@@ -51,6 +51,8 @@ final class ColorViewController: UIViewController {
             textField.delegate = self
             addButtonToKeyboard(for: textField)
         }
+        
+        setupColorBoard()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,11 +70,10 @@ final class ColorViewController: UIViewController {
         }
     }
     
-    @IBAction func buttonDoneTapped() {
+    @IBAction func buttonDoneTapped(_ sender: UIButton) {
         delegate?.applyColor(color: colorBoard.backgroundColor ?? .white)
-        view.endEditing(true)
+        dismiss(animated: true)
     }
-    
     
     // MARK: - Private Methods
     

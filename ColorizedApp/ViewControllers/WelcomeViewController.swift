@@ -7,15 +7,21 @@
 
 import UIKit
 
-final class WelcomeViewController: UIViewController, ColorViewControllerDelegate {
-    func applyColor(color: UIColor) {
-        view.backgroundColor = color
-    }
+final class WelcomeViewController: UIViewController {
+    
+    // MARK: - View life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationVC = segue.destination as? UINavigationController else { return }
-        guard let colorVC = navigationVC.topViewController as? ColorViewController else { return }
+        let colorVC = segue.destination as! ColorViewController
         colorVC.delegate = self
+        colorVC.backgroundVC = view.backgroundColor
     }
 }
 
+// MARK: - Color Delegate
+
+extension WelcomeViewController: ColorViewControllerDelegate {
+    func applyColor(color: UIColor) {
+        view.backgroundColor = color
+    }
+}
